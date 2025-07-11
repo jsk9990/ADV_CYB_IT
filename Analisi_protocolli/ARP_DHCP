@@ -1,0 +1,40 @@
+1. Analisi delle Richieste ARP con Destinazione MAC Null
+
+index=botsv3 sourcetype=stream:arp arp_dest_mac="00:00:00:00:00:00" 
+| eval pair = src_ip . "->" . dest_ip 
+| stats count by pair
+| sort – count
+
+2. Distribuzione del Traffico ARP per Tipo di Operazione
+
+index=botsv3 sourcetype=stream:arp 
+| stats count by opcode 
+| sort – count
+
+3. Top Host per Traffico ARP Generato
+
+index=botsv3 sourcetype=stream:arp 
+| stats count by src_ip 
+| sort - count 
+| head 35
+
+4. Distribuzione dei Messaggi DHCP per Tipo di Operazione
+
+index=botsv3 sourcetype=stream:dhcp 
+| stats count by opcode 
+| sort – count
+
+5. Configurazione dei Server DHCP
+
+index=botsv3 sourcetype=stream:dhcp
+| stats avg(ip_lease_time) as avg_lease_time, values(domain_name{}) as domains, values(dns_server{}) as dns_servers by dest_ip
+| sort - avg_lease_time
+
+6. Assegnazione degli Indirizzi IP tramite DHCP
+
+index=botsv3 sourcetype=stream:dhcp 
+| stats count by yiaddr, chaddr
+| sort – count
+
+
+
