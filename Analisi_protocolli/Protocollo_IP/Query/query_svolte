@@ -1,0 +1,53 @@
+1. Volume traffico per protocollo
+
+index=botsv3 sourcetype=stream:ip 
+| stats sum(bytes) as total_bytes by protocol 
+| where total_bytes > 5
+
+2. Protocolli utilizzati
+
+index=botsv3 sourcetype=stream:ip 
+| stats count by protocol
+
+3. Timechart
+
+index=botsv3 sourcetype=stream:ip 
+| timechart span=1m count
+
+4. Heatmap
+
+index=botsv3 sourcetype=stream:ip 
+| stats count AS value by src_ip, dest_ip 
+| eval tooltip = "SRC: " . src_ip . " | DEST: " . dest_ip . " | COUNT: " . value
+| table value tooltip src_ip dest_ip
+
+5. Media, Mediana e Deviazione Standard
+
+index=botsv3 source=stream:ip 
+| stats avg(bytes) AS Media, median(bytes) AS Mediana, stdev(bytes) AS Deviazione_Standard
+| table source,Media, Mediana, Deviazione_Standard
+
+6. Outlier Chart
+
+index=botsv3 sourcetype=stream:ip 
+| timechart span=1m count 
+| streamstats avg(count) as avg stdev(count) as stdev
+| eval upper_bound = avg + 2*stdev, lower_bound = avg - 2*stdev
+| table _time, count, lower_bound, upper_bound
+
+7. Top 15 IP Sorgenti
+
+index=botsv3 sourcetype=stream:ip 
+| stats count by src_ip 
+| sort -count 
+| head 15
+
+
+
+
+
+
+
+
+
+
