@@ -1,0 +1,3 @@
+index=botsv3 source=stream:* 
+| stats count by source
+| table source, count
