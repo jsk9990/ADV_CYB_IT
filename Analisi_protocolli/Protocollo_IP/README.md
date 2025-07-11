@@ -11,4 +11,4 @@ index=botsv3 sourcetype=stream:ip
 | stats sum(bytes) as total_bytes by protocol
 | where total_bytes > 5
 ```
-!volume_traffico_per_protocollo.png 
+!img/volume_traffico_per_protocollo.png 
