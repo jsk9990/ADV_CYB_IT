@@ -12,4 +12,8 @@ index=botsv3 sourcetype=stream:arp arp_dest_mac="00:00:00:00:00:00"
 | eval pair = src_ip . "->" . dest_ip
 | stats count by pair
 | sort – count
+```
 
+
+
+---
