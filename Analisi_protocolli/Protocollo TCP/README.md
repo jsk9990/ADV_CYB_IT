@@ -12,7 +12,7 @@ index=botsv3 sourcetype=stream:tcp canceled=1
 | table src_ip, dest_ip, dest_port, connessioni_interrotte, flow_ids
 
 ```
-![Descrizione dell'immagine](img/connessioni_interrotte_tcp.png)
+![Descrizione dell'immagine](img/Connessioni_interrotte_tcp.png)
 
 ---
 
@@ -25,7 +25,7 @@ index=botsv3 sourcetype=stream:tcp
 | head 10
 
 ```
-![Descrizione dell'immagine](img/distribuzione_porte_tcp.png)
+![Descrizione dell'immagine](img/Distribuzione_porte_tcp.png)
 
 ---
 
