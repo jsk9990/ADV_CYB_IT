@@ -58,7 +58,7 @@ index=botsv3 sourcetype=stream:dns
 | sort - count
 |  head 15
 ```
-![Descrizione dell'immagine](server_dns_piu_utilizzati.png)
+![Descrizione dell'immagine](img/server_dns_piu_utilizzati.png)
 
 ---
 
