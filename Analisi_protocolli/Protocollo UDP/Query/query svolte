@@ -1,0 +1,26 @@
+1. Distribuzione delle Porte di Destinazione UDP
+
+index=botsv3 sourcetype=stream:udp 
+| stats count AS num_flussi by dest_port 
+| sort - num_flussi 
+| head 10
+------------------------------------------------------------------------------------------------
+2. Top Indirizzi Sorgenti per UDP
+
+index=botsv3 sourcetype=stream:udp 
+| stats count AS num_flussi, sum(bytes) AS total_bytes by src_ip 
+| sort - total_bytes 
+| head 20
+------------------------------------------------------------------------------------------------
+3. Analisi dei Tempi di Trasmissione UDP
+
+index=botsv3 sourcetype=stream:udp 
+| stats avg(time_taken) AS avg_time_taken, sum(bytes) AS total_bytes by src_ip, dest_ip 
+| sort - avg_time_taken 
+| head 10
+------------------------------------------------------------------------------------------------
+4. Timechart per protocollo UDP
+
+index=botsv3 sourcetype=stream:udp
+| timechart span=30s count AS connessioni_udp
+------------------------------------------------------------------------------------------------
