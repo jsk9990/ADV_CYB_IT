@@ -1,0 +1,33 @@
+1 Distribuzione dei tipi di messaggi richiesti 
+
+index=botsv3 sourcetype=stream:dns
+| stats count by message_type{}
+| sort - count
+------------------------------------------------------------
+2 Distribuzione dei Tipi di Query DNS
+
+index=botsv3 sourcetype=stream:dns 
+| stats count by query_type
+| sort – count
+------------------------------------------------------------
+3 Analisi dei Codici di Risposta DNS
+
+index=botsv3 sourcetype=stream:dns
+| stats count by reply_code
+| sort – count
+------------------------------------------------------------
+4 Top 15 Query risolte 
+
+index=botsv3 sourcetype=stream:dns 
+| stats count by query{}
+| sort - count
+| head 15
+------------------------------------------------------------
+5. Analisi dei server DNS più utilizzati
+
+index=botsv3 sourcetype=stream:dns 
+| mvexpand hostname{}
+| stats count by hostname{}
+| sort - count
+|  head 15
+------------------------------------------------------------
